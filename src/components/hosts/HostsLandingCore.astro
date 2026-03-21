@@ -20,7 +20,6 @@ interface Props {
 const {
   title,
   subtitle,
-  body,
   ctaLabel,
   ctaHref,
   videoId,
@@ -33,7 +32,24 @@ const {
 
 const pid = idPrefix;
 
-const stackClass = 'gap-16 py-20 md:gap-24 md:py-28 lg:gap-28 lg:py-32';
+const stackClass = 'gap-20 py-24 md:gap-28 md:py-32 lg:gap-32 lg:py-40';
+
+const pillars = {
+  es: [
+    { title: 'Ritmos conscientes', desc: 'Fomentamos el trabajo profundo sin la urgencia constante.', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
+    { title: 'Límites saludables', desc: 'Respetamos el tiempo de desconexión y el espacio personal.', icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z' },
+    { title: 'Comunidad respetuosa', desc: 'Creamos entornos de apoyo mutuo y colaboración genuina.', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' },
+    { title: 'Sostenibilidad', desc: 'Cuidamos nuestro impacto en el entorno y la naturaleza.', icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z' }
+  ],
+  en: [
+    { title: 'Conscious rhythms', desc: 'We encourage deep work without constant urgency.', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
+    { title: 'Healthy boundaries', desc: 'We respect disconnection time and personal space.', icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z' },
+    { title: 'Respectful community', desc: 'We create environments of mutual support and genuine collaboration.', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z' },
+    { title: 'Sustainability', desc: 'We care for our impact on the environment and nature.', icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z' }
+  ]
+};
+
+const currentPillars = pillars[lang];
 ---
 
 <div class:list={['flex flex-col', stackClass]}>
@@ -41,35 +57,58 @@ const stackClass = 'gap-16 py-20 md:gap-24 md:py-28 lg:gap-28 lg:py-32';
   <section class="flex flex-col items-center px-2 text-center" aria-labelledby={`${pid}hosts-hero-title`}>
     <h1
       id={`${pid}hosts-hero-title`}
-      class="max-w-[22ch] text-[clamp(1.85rem,5.5vw+0.6rem,3.85rem)] font-bold italic leading-[1.06] tracking-tight text-primary md:max-w-[28ch]"
+      class="max-w-[22ch] text-[clamp(2.25rem,6vw+1rem,4.5rem)] font-bold italic leading-[1.05] tracking-tight text-primary md:max-w-[28ch]"
     >
       {title}
     </h1>
   </section>
 
-  <!-- Sección 2: Subtítulo – Ética, recursos, manifiesto -->
+  <!-- Sección 2: Subtítulo y Pilares -->
   <section class="flex flex-col items-center px-2 text-center" aria-labelledby={`${pid}hosts-subtitle`}>
     <p
       id={`${pid}hosts-subtitle`}
-      class="max-w-[44ch] text-base font-light leading-[1.75] text-primary/85 md:max-w-[52ch] md:text-lg md:leading-relaxed"
+      class="max-w-[48ch] text-lg font-light leading-[1.8] text-primary/85 md:max-w-[56ch] md:text-xl"
     >
       {subtitle}
     </p>
-    {body && (
-      <p class="mt-6 max-w-[42ch] text-[0.95rem] font-light leading-[1.7] text-primary/75 md:max-w-[48ch] md:text-base">
-        {body}
-      </p>
-    )}
+    
+    <div class="mt-16 grid w-full max-w-4xl grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8 text-left">
+      {currentPillars.map((pillar) => (
+        <div class="group flex flex-col items-start rounded-2xl border border-primary/10 bg-white/40 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:bg-white/60 hover:shadow-md">
+          <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/5 text-primary transition-colors duration-300 group-hover:bg-primary/10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d={pillar.icon} />
+            </svg>
+          </div>
+          <h3 class="mb-2 text-lg font-semibold text-primary">{pillar.title}</h3>
+          <p class="text-sm font-light leading-relaxed text-primary/75">{pillar.desc}</p>
+        </div>
+      ))}
+    </div>
   </section>
 
   <!-- Sección 3: CTA – Únete como Host -->
-  <section class="flex flex-col items-center" aria-label={lang === 'es' ? 'Llamada a la acción' : 'Call to action'}>
+  <section class="flex flex-col items-center gap-6" aria-label={lang === 'es' ? 'Llamada a la acción' : 'Call to action'}>
     <a
       href={ctaHref}
-      class="inline-flex min-h-[3.25rem] items-center justify-center rounded-full bg-secondary px-10 py-3.5 text-base font-semibold text-primary shadow-[0_6px_28px_-6px_rgba(234,179,8,0.65)] transition duration-300 hover:scale-[1.03] hover:shadow-[0_10px_40px_-6px_rgba(234,179,8,0.85)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary active:scale-[0.98]"
+      class="inline-flex min-h-[3.5rem] items-center justify-center rounded-full bg-secondary px-12 py-4 text-lg font-semibold text-primary shadow-[0_8px_30px_-6px_rgba(234,179,8,0.65)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-[0_12px_40px_-6px_rgba(234,179,8,0.85)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary active:scale-[0.98]"
     >
       {ctaLabel}
     </a>
+    
+    <!-- Social Proof Counter -->
+    <div class="flex items-center gap-2 text-sm font-medium text-primary/80">
+      <div class="flex -space-x-2">
+        <div class="h-8 w-8 rounded-full border-2 border-light-green bg-primary/10"></div>
+        <div class="h-8 w-8 rounded-full border-2 border-light-green bg-primary/20"></div>
+        <div class="h-8 w-8 rounded-full border-2 border-light-green bg-primary/30"></div>
+      </div>
+      <p>
+        {lang === 'es' ? 'Únete a ' : 'Join '}
+        <span class="social-proof-counter font-bold text-primary" data-target="150">0</span>
+        {lang === 'es' ? '+ Hosts éticos' : '+ ethical Hosts'}
+      </p>
+    </div>
   </section>
 
   <!-- Sección 4: Vídeo – Manifiesto y ética -->
@@ -83,3 +122,48 @@ const stackClass = 'gap-16 py-20 md:gap-24 md:py-28 lg:gap-28 lg:py-32';
     />
   </section>
 </div>
+
+<script>
+  function initCounters() {
+    const counters = document.querySelectorAll('.social-proof-counter');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = entry.target as HTMLElement;
+          if (target.dataset.animated === 'true') return;
+          
+          target.dataset.animated = 'true';
+          const endValue = parseInt(target.dataset.target || '0', 10);
+          const duration = 2000; // ms
+          const frameRate = 1000 / 60;
+          const totalFrames = Math.round(duration / frameRate);
+          let frame = 0;
+          
+          const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
+          
+          const counterInterval = setInterval(() => {
+            frame++;
+            const progress = easeOutQuart(frame / totalFrames);
+            const currentCount = Math.round(endValue * progress);
+            
+            target.textContent = currentCount.toString();
+            
+            if (frame === totalFrames) {
+              clearInterval(counterInterval);
+              target.textContent = endValue.toString();
+            }
+          }, frameRate);
+          
+          observer.unobserve(target);
+        }
+      });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => observer.observe(counter));
+  }
+
+  // Ejecutar en carga inicial y en navegaciones de Astro
+  initCounters();
+  document.addEventListener('astro:page-load', initCounters);
+</script>
