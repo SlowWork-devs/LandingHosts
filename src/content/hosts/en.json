@@ -1,7 +1,10 @@
 {
-  "title": "Hosts",
-  "subtitle": "Hosts page content (EN).",
-  "cta": "",
-  "videoTitle": "",
-  "videoId": ""
+  "title": "Offer Your Space. Share the SloWork Manifesto.",
+  "subtitle": "We connect hosts with people seeking coworking, coliving, and purposeful remote work environments. Your space becomes a haven for deep work, mental wellness, and group activities in touch with nature.",
+  "body": "As a SloWork Host, you embrace and promote our Manifesto: conscious rhythms, healthy boundaries, respectful community, and commitment to sustainability. Resources, support, and a network of hosts who share the same ethics.",
+  "cta": "Join as a Host",
+  "ctaHref": "#join",
+  "videoTitle": "The SloWork Manifesto: ethics and guidelines",
+  "videoId": "",
+  "posterUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=85"
 }

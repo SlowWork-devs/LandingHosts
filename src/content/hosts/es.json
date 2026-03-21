@@ -1,7 +1,10 @@
 {
-  "title": "Anfitriones",
-  "subtitle": "Contenido de la página de hosts (ES).",
-  "cta": "",
-  "videoTitle": "",
-  "videoId": ""
+  "title": "Ofrece tu espacio. Comparte el Manifiesto SloWork.",
+  "subtitle": "Conectamos anfitriones con personas que buscan coworking, coliving y entornos de trabajo remoto con propósito. Tu espacio se convierte en refugio para el trabajo profundo, la salud mental y las actividades grupales en contacto con la naturaleza.",
+  "body": "Como Host SloWork, aceptas y difundes nuestro Manifiesto: ritmos conscientes, límites saludables, comunidad respetuosa y compromiso con la sostenibilidad. Recursos, apoyo y una red de anfitriones que comparten la misma ética.",
+  "cta": "Únete como Host",
+  "ctaHref": "#unete",
+  "videoTitle": "El Manifiesto SloWork: ética y normativas",
+  "videoId": "",
+  "posterUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=85"
 }

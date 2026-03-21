@@ -7,9 +7,12 @@ const hosts = defineCollection({
   schema: z.object({
     title: z.string(),
     subtitle: z.string(),
+    body: z.string().optional(),
     cta: z.string(),
+    ctaHref: z.string(),
     videoTitle: z.string(),
     videoId: z.string(),
+    posterUrl: z.string(),
   }),
 });
 
