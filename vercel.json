@@ -1,0 +1,9 @@
+{
+    "redirects": [
+      {
+        "source": "/",
+        "destination": "/hosts/",
+        "permanent": true
+      }
+    ]
+  }
