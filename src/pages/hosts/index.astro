@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import logoImg from '../../assets/logo-slowork.png';
+import Layout from '../../layouts/Layout.astro';
+import LanguageSwitcher from '../../components/hosts/LanguageSwitcher.astro';
+import HostsLandingCore from '../../components/hosts/HostsLandingCore.astro';
+import HostsFooter from '../../components/hosts/HostsFooter.astro';
+
+const DEFAULT_POSTER =
+  'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=85';
+
+const entries = await getCollection('hosts');
+const pageEs = entries.find((e: CollectionEntry<'hosts'>) => e.id === 'es');
+const pageEn = entries.find((e: CollectionEntry<'hosts'>) => e.id === 'en');
+
+function landingFor(
+  page: CollectionEntry<'hosts'> | undefined,
+  lang: 'es' | 'en',
+  idPrefix: string,
+  posterLoading: 'eager' | 'lazy',
+) {
+  const p = page?.data;
+  const title =
+    p?.title ??
+    (lang === 'es'
+      ? 'Ofrece tu espacio. Comparte el Manifiesto SloWork.'
+      : 'Offer Your Space. Share the SloWork Manifesto.');
+  const subtitle =
+    p?.subtitle ??
+    (lang === 'es'
+      ? 'Conectamos anfitriones con personas que buscan coworking, coliving y trabajo remoto con propósito.'
+      : 'We connect hosts with people seeking coworking, coliving, and purposeful remote work.');
+  return {
+    title,
+    subtitle,
+    body: p?.body,
+    ctaLabel: p?.cta ?? (lang === 'es' ? 'Únete como Host' : 'Join as a Host'),
+    ctaHref: p?.ctaHref?.trim() || '#',
+    videoTitle: p?.videoTitle ?? '',
+    videoId: p?.videoId ?? '',
+    posterUrl: p?.posterUrl?.trim() || DEFAULT_POSTER,
+    lang,
+    idPrefix,
+    posterLoading,
+  };
+}
+
+const metaEs = pageEs?.data.subtitle ?? '';
+const metaDescription = metaEs.length > 160 ? `${metaEs.slice(0, 157)}…` : metaEs;
+
+const propsEs = landingFor(pageEs, 'es', 'es-', 'eager');
+const propsEn = landingFor(pageEn, 'en', 'en-', 'lazy');
+---
+
+<Layout title="SloWork Hosts" lang="es" description={metaDescription}>
+  <header
+    class="sticky top-0 z-40 flex items-center justify-between border-b border-primary/10 bg-bg-soft/85 px-5 py-4 backdrop-blur-md sm:px-8"
+  >
+    <a href="/hosts/" class="flex shrink-0 items-center" aria-label="SloWork Hosts">
+      <Image src={logoImg} alt="" width={120} class="h-9 w-auto object-contain sm:h-10" loading="eager" />
+    </a>
+    <LanguageSwitcher />
+  </header>
+
+  <div
+    id="hosts-panel-es"
+    data-lang-panel="es"
+    class="flex min-h-0 min-w-0 flex-1 flex-col"
+  >
+    <main class="w-full flex-1">
+      <div class="mx-auto w-full max-w-5xl px-5 sm:px-8 lg:px-10">
+        <HostsLandingCore {...propsEs} />
+      </div>
+    </main>
+    <HostsFooter lang="es" />
+  </div>
+
+  <div
+    id="hosts-panel-en"
+    data-lang-panel="en"
+    hidden
+    class="hidden flex min-h-0 min-w-0 flex-1 flex-col"
+  >
+    <main class="w-full flex-1">
+      <div class="mx-auto w-full max-w-5xl px-5 sm:px-8 lg:px-10">
+        <HostsLandingCore {...propsEn} />
+      </div>
+    </main>
+    <HostsFooter lang="en" />
+  </div>
+</Layout>
