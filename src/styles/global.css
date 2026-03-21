@@ -1,15 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,300;0,400;0,600;0,700;1,600;1,700&display=swap');
+
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1A2E1A;   /* Verde Bosque */
-  --color-secondary: #EAB308; /* Amarillo Dorado */
-  --color-bg-soft: #F2F4F2;   /* Gris Verdoso Suave */
+  --color-primary: #013333;
+  --color-secondary: #e0bb44;
+  --color-light-green: #ddeee5;
 
-  --font-display: "Inter", system-ui, sans-serif;
+  --font-display: "Outfit", system-ui, sans-serif;
 }
 
 @layer base {
   body {
-    @apply bg-bg-soft text-primary font-display antialiased;
+    @apply bg-light-green text-primary font-display antialiased;
   }
 }
