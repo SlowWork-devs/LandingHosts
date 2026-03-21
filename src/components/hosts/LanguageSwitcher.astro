@@ -1,0 +1,82 @@
+---
+---
+
+<div
+  class="inline-flex items-center gap-0.5 rounded-full border border-primary/15 bg-white/90 p-1 shadow-sm backdrop-blur-sm"
+  role="group"
+  aria-label="Language"
+>
+  <button
+    type="button"
+    data-lang-btn="es"
+    class="hosts-lang-btn min-h-10 min-w-11 rounded-full px-4 py-2 text-sm font-semibold transition hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary bg-primary text-white"
+    aria-pressed="true"
+    aria-controls="hosts-panel-es"
+  >
+    ES
+  </button>
+  <button
+    type="button"
+    data-lang-btn="en"
+    class="hosts-lang-btn min-h-10 min-w-11 rounded-full px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+    aria-pressed="false"
+    aria-controls="hosts-panel-en"
+  >
+    EN
+  </button>
+</div>
+
+<script is:inline>
+  (function () {
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.querySelectorAll('[data-lang-panel]').forEach(function (el) {
+        if (!(el instanceof HTMLElement)) return;
+        var isOn = el.dataset.langPanel === lang;
+        el.classList.toggle('hidden', !isOn);
+        if (isOn) el.removeAttribute('hidden');
+        else el.setAttribute('hidden', '');
+      });
+      document.querySelectorAll('[data-lang-btn]').forEach(function (btn) {
+        if (!(btn instanceof HTMLButtonElement)) return;
+        var active = btn.dataset.langBtn === lang;
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        btn.classList.toggle('bg-primary', active);
+        btn.classList.toggle('text-white', active);
+      });
+      try {
+        localStorage.setItem('slowork-hosts-lang', lang);
+      } catch (e) {
+        void e;
+      }
+    }
+
+    function bind() {
+      document.querySelectorAll('[data-lang-btn]').forEach(function (node) {
+        var btn = node instanceof HTMLButtonElement ? node : null;
+        if (!btn || btn.dataset.bound === '1') return;
+        btn.dataset.bound = '1';
+        var target = btn;
+        btn.addEventListener('click', function () {
+          var lang = target.dataset.langBtn;
+          if (lang === 'es' || lang === 'en') setLang(lang);
+        });
+      });
+    }
+
+    function init() {
+      var initial = 'es';
+      try {
+        var saved = localStorage.getItem('slowork-hosts-lang');
+        if (saved === 'en' || saved === 'es') initial = saved;
+      } catch (e) {
+        void e;
+      }
+      setLang(initial);
+      bind();
+    }
+
+    init();
+    document.addEventListener('astro:page-load', init);
+  })();
+</script>

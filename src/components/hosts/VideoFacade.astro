@@ -1,0 +1,85 @@
+---
+interface Props {
+  videoId: string;
+  videoTitle: string;
+  posterUrl: string;
+  lang: 'es' | 'en';
+  posterLoading?: 'eager' | 'lazy';
+}
+
+const { videoId, videoTitle, posterUrl, lang, posterLoading = 'eager' } = Astro.props;
+
+const playLabel = lang === 'es' ? 'Reproducir vídeo' : 'Play video';
+const soonLabel = lang === 'es' ? 'Vídeo disponible pronto' : 'Video coming soon';
+const hasVideo = Boolean(videoId?.trim());
+---
+
+<div
+  class="video-facade group relative aspect-video w-full overflow-hidden rounded-2xl bg-primary/5 shadow-[0_24px_80px_-24px_rgba(26,46,26,0.35)] ring-1 ring-primary/10"
+  data-video-facade={hasVideo ? '' : undefined}
+  data-video-id={hasVideo ? videoId : undefined}
+  data-video-title={videoTitle}
+>
+  <img
+    src={posterUrl}
+    alt=""
+    class="h-full w-full object-cover transition duration-700 ease-out group-[.is-playing]:opacity-0"
+    loading={posterLoading}
+    decoding="async"
+    {...(posterLoading === 'eager' ? { fetchpriority: 'high' as const } : {})}
+  />
+  <div
+    class="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/25 via-transparent to-primary/10"
+    aria-hidden="true"
+  />
+  <div class="absolute inset-0 z-20 flex items-center justify-center p-6">
+    <button
+      type="button"
+      class="video-facade__play flex h-20 w-20 items-center justify-center rounded-full bg-secondary text-primary shadow-[0_8px_32px_-4px_rgba(234,179,8,0.75)] ring-2 ring-secondary ring-offset-2 ring-offset-bg-soft transition duration-300 hover:scale-105 hover:shadow-[0_14px_44px_-6px_rgba(234,179,8,0.9)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:scale-100"
+      aria-label={hasVideo ? playLabel : soonLabel}
+      disabled={!hasVideo}
+      data-play-btn
+    >
+      <svg class="ml-1 h-9 w-9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M8 5v14l11-7L8 5z" />
+      </svg>
+    </button>
+  </div>
+  <div
+    class="video-facade__embed pointer-events-none absolute inset-0 z-30 hidden h-full w-full group-[.is-playing]:pointer-events-auto group-[.is-playing]:block"
+    data-embed-slot
+  >
+  </div>
+</div>
+
+{hasVideo && (
+  <script>
+    (function () {
+      function init() {
+        document.querySelectorAll('[data-video-facade]').forEach((root) => {
+          if (!(root instanceof HTMLElement)) return;
+          if (root.dataset.initialized === '1') return;
+          const id = root.dataset.videoId?.trim();
+          const title = root.dataset.videoTitle || 'SloWork Hosts';
+          const btn = root.querySelector('[data-play-btn]');
+          const slot = root.querySelector('[data-embed-slot]');
+          if (!id || !btn || !slot) return;
+          root.dataset.initialized = '1';
+          btn.addEventListener('click', () => {
+            root.classList.add('is-playing');
+            const iframe = document.createElement('iframe');
+            iframe.className = 'h-full w-full';
+            iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+            iframe.title = title;
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.loading = 'lazy';
+            slot.appendChild(iframe);
+            btn.setAttribute('hidden', '');
+          });
+        });
+      }
+      init();
+    })();
+  </script>
+)}

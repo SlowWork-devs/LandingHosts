@@ -1,0 +1,85 @@
+---
+import VideoFacade from './VideoFacade.astro';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  body?: string;
+  ctaLabel: string;
+  ctaHref: string;
+  videoId: string;
+  videoTitle: string;
+  posterUrl: string;
+  lang: 'es' | 'en';
+  /** Prefijos únicos para ids (p. ej. varias instancias ES/EN en la misma página) */
+  idPrefix?: string;
+  /** Carga del poster del vídeo (lazy en panel oculto mejora LCP) */
+  posterLoading?: 'eager' | 'lazy';
+}
+
+const {
+  title,
+  subtitle,
+  body,
+  ctaLabel,
+  ctaHref,
+  videoId,
+  videoTitle,
+  posterUrl,
+  lang,
+  idPrefix = '',
+  posterLoading = 'eager',
+} = Astro.props;
+
+const pid = idPrefix;
+
+const stackClass = 'gap-16 py-20 md:gap-24 md:py-28 lg:gap-28 lg:py-32';
+---
+
+<div class:list={['flex flex-col', stackClass]}>
+  <!-- Sección 1: H1 – Propuesta de valor -->
+  <section class="flex flex-col items-center px-2 text-center" aria-labelledby={`${pid}hosts-hero-title`}>
+    <h1
+      id={`${pid}hosts-hero-title`}
+      class="max-w-[22ch] text-[clamp(1.85rem,5.5vw+0.6rem,3.85rem)] font-bold italic leading-[1.06] tracking-tight text-primary md:max-w-[28ch]"
+    >
+      {title}
+    </h1>
+  </section>
+
+  <!-- Sección 2: Subtítulo – Ética, recursos, manifiesto -->
+  <section class="flex flex-col items-center px-2 text-center" aria-labelledby={`${pid}hosts-subtitle`}>
+    <p
+      id={`${pid}hosts-subtitle`}
+      class="max-w-[44ch] text-base font-light leading-[1.75] text-primary/85 md:max-w-[52ch] md:text-lg md:leading-relaxed"
+    >
+      {subtitle}
+    </p>
+    {body && (
+      <p class="mt-6 max-w-[42ch] text-[0.95rem] font-light leading-[1.7] text-primary/75 md:max-w-[48ch] md:text-base">
+        {body}
+      </p>
+    )}
+  </section>
+
+  <!-- Sección 3: CTA – Únete como Host -->
+  <section class="flex flex-col items-center" aria-label={lang === 'es' ? 'Llamada a la acción' : 'Call to action'}>
+    <a
+      href={ctaHref}
+      class="inline-flex min-h-[3.25rem] items-center justify-center rounded-full bg-secondary px-10 py-3.5 text-base font-semibold text-primary shadow-[0_6px_28px_-6px_rgba(234,179,8,0.65)] transition duration-300 hover:scale-[1.03] hover:shadow-[0_10px_40px_-6px_rgba(234,179,8,0.85)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary active:scale-[0.98]"
+    >
+      {ctaLabel}
+    </a>
+  </section>
+
+  <!-- Sección 4: Vídeo – Manifiesto y ética -->
+  <section class="w-full px-0" aria-label={videoTitle || (lang === 'es' ? 'Vídeo' : 'Video')}>
+    <VideoFacade
+      videoId={videoId}
+      videoTitle={videoTitle || title}
+      posterUrl={posterUrl}
+      lang={lang}
+      posterLoading={posterLoading}
+    />
+  </section>
+</div>

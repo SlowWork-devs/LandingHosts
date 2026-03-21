@@ -1,0 +1,66 @@
+---
+// Footer legal alineado con el blog, contraste corregido (blanco sólido)
+interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const currentYear = new Date().getFullYear();
+
+const t = lang === 'es'
+  ? {
+      rights: 'Todos los derechos reservados.',
+      privacy: 'Política de Privacidad',
+      contact: 'Contacto',
+      cookies: 'Política de Cookies',
+      legal: 'Aviso Legal',
+      terms: 'Términos y Condiciones',
+      manifesto: 'Manifiesto',
+    }
+  : {
+      rights: 'All rights reserved.',
+      privacy: 'Privacy Policy',
+      contact: 'Contact',
+      cookies: 'Cookies Policy',
+      legal: 'Legal Notice',
+      terms: 'Terms & Conditions',
+      manifesto: 'Manifesto',
+    };
+
+const basePath = `/${lang}`;
+const links = [
+  { href: `${basePath}/privacy-policy`, label: t.privacy },
+  { href: 'mailto:hola@slowork.com', label: t.contact },
+  { href: `${basePath}/cookies-policy`, label: t.cookies },
+  { href: `${basePath}/legal-notice`, label: t.legal },
+  { href: `${basePath}/terms-and-conditions`, label: t.terms },
+  { href: '#manifesto', label: t.manifesto },
+];
+---
+
+<footer class="mt-auto w-full bg-primary py-10 md:py-12">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col items-center justify-center text-center">
+      <div class="text-xs sm:text-sm md:text-base leading-loose">
+        <span class="text-white/90">© {currentYear} SloWork. {t.rights}</span>
+        <span class="mx-2 text-secondary/80 hidden sm:inline" aria-hidden="true">|</span>
+        <nav
+          aria-label={lang === 'es' ? 'Enlaces legales' : 'Legal links'}
+          class="flex flex-wrap justify-center gap-x-1 gap-y-2 sm:inline-block"
+        >
+          {links.map((item, i) => (
+            <>
+              {i > 0 && <span class="mx-1.5 text-secondary/60 hidden sm:inline" aria-hidden="true">|</span>}
+              <a
+                href={item.href}
+                class="inline-flex items-center justify-center min-h-11 min-w-11 py-2 px-1 text-white/90 hover:text-secondary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-sm touch-manipulation"
+              >
+                {item.label}
+              </a>
+            </>
+          ))}
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>
