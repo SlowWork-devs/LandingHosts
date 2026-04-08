@@ -28,13 +28,15 @@ const t = lang === 'es'
     };
 
 const basePath = `/${lang}`;
+const manifestoHash = lang === 'es' ? '#es-manifesto' : '#en-manifesto';
+
 const links = [
   { href: `${basePath}/privacy-policy`, label: t.privacy },
   { href: 'mailto:hola@slowork.com', label: t.contact },
   { href: `${basePath}/cookies-policy`, label: t.cookies },
   { href: `${basePath}/legal-notice`, label: t.legal },
   { href: `${basePath}/terms-and-conditions`, label: t.terms },
-  { href: '#manifesto', label: t.manifesto },
+  { href: manifestoHash, label: t.manifesto },
 ];
 ---
 
@@ -42,7 +44,7 @@ const links = [
   <div class="max-w-7xl mx-auto px-6">
     <div class="flex flex-col items-center justify-center text-center">
       <div class="text-xs sm:text-sm md:text-base leading-loose">
-        <span class="text-white/90">© {currentYear} SloWork. {t.rights}</span>
+        <span class="text-white/90">© {currentYear} Slowork. {t.rights}</span>
         <span class="mx-2 text-secondary/80 hidden sm:inline" aria-hidden="true">|</span>
         <nav
           aria-label={lang === 'es' ? 'Enlaces legales' : 'Legal links'}
