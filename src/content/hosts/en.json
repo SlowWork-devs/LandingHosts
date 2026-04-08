@@ -1,10 +1,180 @@
 {
-  "title": "Offer Your Space. Share the SloWork Manifesto.",
-  "subtitle": "We connect hosts with people seeking coworking, coliving, and purposeful remote work environments. Your space becomes a haven for deep work, mental wellness, and group activities in touch with nature.",
-  "body": "As a SloWork Host, you embrace and promote our Manifesto: conscious rhythms, healthy boundaries, respectful community, and commitment to sustainability. Resources, support, and a network of hosts who share the same ethics.",
-  "cta": "Be our Next Host",
-  "ctaHref": "#join",
-  "videoTitle": "The SloWork Manifesto: ethics and guidelines",
-  "videoId": "",
-  "posterUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=85"
+  "hero": {
+    "title": "Turn your space into a magnet for conscious remote travelers",
+    "subtitle": "Break free from hidden fees, rigid rules and generic platforms. Join Slowork and connect with guests who value nature, focus, wellbeing and meaningful stays.",
+    "microcopy": "Limited spots available. We’re inviting a select group of hosts to co-create the first version of Slowork.",
+    "cta": "Join the beta now",
+    "ctaHref": "#en-join"
+  },
+  "problem": {
+    "heading": "Tired of playing by their rules?",
+    "bodyParagraphs": [
+      "Too many hosts feel trapped in platforms built for volume, not alignment.",
+      "High commissions reduce margins. Generic marketplaces flatten your identity. And limited control over guest relationships makes it harder to build loyalty, sell experiences, or grow something meaningful."
+    ],
+    "points": [
+      "Escalating commissions squeeze your margins",
+      "No direct contact with guests means no relationship or loyalty",
+      "Opaque algorithms make it hard to stand out",
+      "Delayed or missed payouts create unnecessary risk",
+      "Generic platforms attract the wrong kind of guest for unique spaces"
+    ],
+    "closing": "It’s time for a platform designed around your values, not just transactions."
+  },
+  "whatIs": {
+    "heading": "What is Slowork?",
+    "paragraphs": [
+      "Slowork is not just another accommodation platform.",
+      "It is a platform built for remote workers who want more than good WiFi. They want places that support deep work, natural environments that improve how they feel, and experiences that help them reconnect with themselves and others.",
+      "For hosts, that means access to a more aligned audience: people looking for calm, focus, nature, community and intentional travel."
+    ],
+    "closing": "A platform, yes. But more importantly — a different kind of hospitality ecosystem."
+  },
+  "whyJoin": {
+    "heading": "Why host with Slowork",
+    "intro": "Slowork helps hosts attract better-fit guests and position their space around something more meaningful than price competition.",
+    "benefits": [
+      {
+        "title": "Lower commissions",
+        "body": "Keep more of your earnings with a more host-friendly model than traditional OTAs."
+      },
+      {
+        "title": "Direct relationships",
+        "body": "Connect with guests more freely, build trust, and create repeat value over time."
+      },
+      {
+        "title": "Targeted audience",
+        "body": "Reach remote workers, wellness travelers and intentional guests looking specifically for places like yours."
+      },
+      {
+        "title": "Support and positioning",
+        "body": "Get guidance, visibility and the opportunity to become part of a curated ecosystem."
+      }
+    ]
+  },
+  "whoFor": {
+    "heading": "Who this is for",
+    "intro": "Slowork is especially relevant for hosts offering spaces that already align with a better way of living and working.",
+    "profiles": [
+      {
+        "title": "Eco-lodge hosts",
+        "body": "Showcase your commitment to nature and attract guests who value sustainability, calm and meaningful travel."
+      },
+      {
+        "title": "Retreat and training hosts",
+        "body": "Manage longer stays, connect with the right guests directly, and create space for workshops, retreats or immersive programs."
+      },
+      {
+        "title": "Community and holistic hosts",
+        "body": "Tell your story, attract aligned people and grow a space built around connection, wellbeing and shared values."
+      },
+      {
+        "title": "Rural B&B owners",
+        "body": "Bring in remote workers and slow travelers looking for authentic, peaceful places beyond the city."
+      }
+    ]
+  },
+  "howItWorks": {
+    "heading": "How it works",
+    "intro": "Joining Slowork is intentionally simple.",
+    "steps": [
+      {
+        "title": "Apply to join the beta",
+        "body": "Fill out a short form and tell us about your space."
+      },
+      {
+        "title": "Get personalised guidance",
+        "body": "Our team reviews your property and shares recommendations on connectivity, workspace setup and guest fit."
+      },
+      {
+        "title": "Publish your profile",
+        "body": "Create a compelling listing, add your experiences and define your availability."
+      },
+      {
+        "title": "Welcome aligned travelers",
+        "body": "Start connecting with guests who share your values and manage your presence through Slowork."
+      }
+    ]
+  },
+  "different": {
+    "heading": "More than exposure. Better alignment.",
+    "paragraphs": [
+      "Slowork is not trying to send more random traffic to your listing.",
+      "It is designed to help the right people discover spaces like yours — spaces that often get lost inside generic platforms."
+    ],
+    "bulletsLead": "This means:",
+    "bullets": [
+      "better guest alignment",
+      "stronger brand identity for your space",
+      "more room to sell experiences, retreats or add-ons",
+      "more meaningful long-term positioning",
+      "a hospitality model built around lifestyle, not mass-market tourism"
+    ]
+  },
+  "whatYouGet": {
+    "heading": "What you get as a Slowork host",
+    "intro": "Joining the beta gives you more than a place to list your space.",
+    "bulletsLead": "Included",
+    "bullets": [
+      "access to the Slowork beta",
+      "visibility inside the Slowork ecosystem",
+      "a more curated audience",
+      "personalised support and recommendations",
+      "the possibility of long-term positioning within the platform",
+      "the opportunity to be part of a more intentional travel and remote work movement"
+    ]
+  },
+  "afterApply": {
+    "heading": "What happens after you apply",
+    "intro": "Once you apply, we’ll review your space and get back to you within a few days.",
+    "bulletsLead": "Selected hosts may receive:",
+    "bullets": [
+      "onboarding support",
+      "listing guidance",
+      "positioning recommendations",
+      "early access to platform features",
+      "future collaboration opportunities as the ecosystem grows"
+    ],
+    "closing": "We’re not looking for mass inventory. We’re looking for spaces that genuinely fit the world Slowork is building."
+  },
+  "faq": {
+    "heading": "Frequently asked questions",
+    "items": [
+      {
+        "question": "What are the commission rates?",
+        "answer": "Our host fee is lower than major OTAs and designed to be transparent and host-friendly."
+      },
+      {
+        "question": "What are the minimum requirements?",
+        "answer": "Stable Wi-Fi, clean facilities, comfortable workspaces and alignment with Slowork’s values and guest expectations."
+      },
+      {
+        "question": "Can I sell courses, retreats or local experiences?",
+        "answer": "Yes. Slowork is designed to support spaces that offer more than accommodation."
+      },
+      {
+        "question": "How do you vet guests?",
+        "answer": "We aim to build a respectful, aligned community through profile validation, expectations and platform culture."
+      },
+      {
+        "question": "Is the beta free?",
+        "answer": "Yes. Beta participation does not include platform fees during the test period."
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": "Ready to host on your terms?",
+    "paragraphs": [
+      "Slowork is being built right now.",
+      "The hosts who join early will not just list their spaces.",
+      "They will help shape a better way for remote workers to discover, book and experience places like theirs."
+    ],
+    "cta": "Apply for the beta now",
+    "ctaHref": "#en-join",
+    "closingLines": [
+      "Welcome better-fit guests.",
+      "Share what makes your space different.",
+      "Be part of a new chapter in conscious hospitality."
+    ]
+  }
 }

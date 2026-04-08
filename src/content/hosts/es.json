@@ -1,10 +1,180 @@
 {
-  "title": "Ofrece tu espacio. Comparte el Manifiesto SloWork.",
-  "subtitle": "Conectamos anfitriones con personas que buscan coworking, coliving y entornos de trabajo remoto con propósito. Tu espacio se convierte en refugio para el trabajo profundo, la salud mental y las actividades grupales en contacto con la naturaleza.",
-  "body": "Como Host SloWork, aceptas y difundes nuestro Manifiesto: ritmos conscientes, límites saludables, comunidad respetuosa y compromiso con la sostenibilidad. Recursos, apoyo y una red de anfitriones que comparten la misma ética.",
-  "cta": "Únete como Host",
-  "ctaHref": "#unete",
-  "videoTitle": "El Manifiesto SloWork: ética y normativas",
-  "videoId": "",
-  "posterUrl": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=85"
+  "hero": {
+    "title": "Convierte tu espacio en un imán para viajeros remotos conscientes",
+    "subtitle": "Déjate de comisiones ocultas, reglas rígidas y plataformas genéricas. Únete a Slowork y conecta con huéspedes que valoran la naturaleza, el foco, el bienestar y estancias con sentido.",
+    "microcopy": "Plazas limitadas. Estamos invitando a un grupo selecto de anfitriones a co-crear la primera versión de Slowork.",
+    "cta": "Únete a la beta ahora",
+    "ctaHref": "#es-join"
+  },
+  "problem": {
+    "heading": "¿Cansado de jugar con sus reglas?",
+    "bodyParagraphs": [
+      "Demasiados anfitriones se sienten atrapados en plataformas pensadas para volumen, no para afinidad.",
+      "Las comisiones altas reducen márgenes. Los marketplaces genéricos aplastan tu identidad. Y el poco control sobre la relación con el huésped dificulta fidelizar, vender experiencias o construir algo con propósito."
+    ],
+    "points": [
+      "Comisiones cada vez más altas te comen el margen",
+      "Sin contacto directo con huéspedes no hay relación ni fidelidad",
+      "Algoritmos opacos hacen difícil destacar",
+      "Pagos retrasados o fallidos generan riesgo innecesario",
+      "Las plataformas genéricas atraen al perfil equivocado para espacios únicos"
+    ],
+    "closing": "Hace falta una plataforma diseñada en torno a tus valores, no solo a la transacción."
+  },
+  "whatIs": {
+    "heading": "¿Qué es Slowork?",
+    "paragraphs": [
+      "Slowork no es una plataforma de alojamiento más.",
+      "Está pensada para personas que trabajan en remoto y quieren más que buen WiFi: espacios que favorezcan el trabajo profundo, entornos naturales que mejoren cómo se sienten y experiencias que les ayuden a reconectarse consigo mismas y con los demás.",
+      "Para anfitriones, eso significa acceso a un público más alineado: personas que buscan calma, foco, naturaleza, comunidad y viaje intencional."
+    ],
+    "closing": "Una plataforma, sí. Pero sobre todo — un ecosistema de hospitalidad distinto."
+  },
+  "whyJoin": {
+    "heading": "Por qué ser anfitrión en Slowork",
+    "intro": "Slowork ayuda a atraer huéspedes que encajan mejor y a posicionar tu espacio en algo más significativo que la guerra de precios.",
+    "benefits": [
+      {
+        "title": "Comisiones más bajas",
+        "body": "Quédate con más de tus ingresos gracias a un modelo más favorable para anfitriones que el de las OTA tradicionales."
+      },
+      {
+        "title": "Relación directa",
+        "body": "Conecta con más libertad con tus huéspedes, genera confianza y valor recurrente en el tiempo."
+      },
+      {
+        "title": "Audiencia afín",
+        "body": "Llega a trabajadores remotos, viajeras de bienestar y huéspedes con intención que buscan precisamente espacios como el tuyo."
+      },
+      {
+        "title": "Acompañamiento y posicionamiento",
+        "body": "Recibe orientación, visibilidad y la oportunidad de formar parte de un ecosistema curado."
+      }
+    ]
+  },
+  "whoFor": {
+    "heading": "Para quién es",
+    "intro": "Slowork encaja especialmente con anfitriones que ya ofrecen espacios alineados con una forma mejor de vivir y trabajar.",
+    "profiles": [
+      {
+        "title": "Anfitriones de ecolodges",
+        "body": "Muestra tu compromiso con la naturaleza y atrae huéspedes que valoran sostenibilidad, calma y viaje con sentido."
+      },
+      {
+        "title": "Retiros y formación",
+        "body": "Gestiona estancias más largas, conecta directamente con el perfil adecuado y abre espacio a talleres, retiros o programas inmersivos."
+      },
+      {
+        "title": "Comunidad y enfoque holístico",
+        "body": "Cuenta tu historia, atrae personas afines y haz crecer un espacio basado en conexión, bienestar y valores compartidos."
+      },
+      {
+        "title": "B&Bs rurales",
+        "body": "Recibe trabajadoras remotas y viajeras slow que buscan lugares auténticos y tranquilos fuera de la ciudad."
+      }
+    ]
+  },
+  "howItWorks": {
+    "heading": "Cómo funciona",
+    "intro": "Unirte a Slowork está pensado para ser sencillo.",
+    "steps": [
+      {
+        "title": "Solicita entrar en la beta",
+        "body": "Rellena un formulario breve y cuéntanos cómo es tu espacio."
+      },
+      {
+        "title": "Recibe orientación personalizada",
+        "body": "Nuestro equipo revisa tu propiedad y te da recomendaciones sobre conectividad, zona de trabajo y encaje con el huésped."
+      },
+      {
+        "title": "Publica tu perfil",
+        "body": "Crea un anuncio sólido, añade tus experiencias y define tu disponibilidad."
+      },
+      {
+        "title": "Da la bienvenida a viajeras alineadas",
+        "body": "Empieza a conectar con huéspedes que comparten tus valores y gestiona tu presencia desde Slowork."
+      }
+    ]
+  },
+  "different": {
+    "heading": "Más que exposición. Mejor encaje.",
+    "paragraphs": [
+      "Slowork no persigue mandar tráfico aleatorio a tu anuncio.",
+      "Está diseñada para que las personas adecuadas descubran espacios como el tuyo — los que muchas veces se pierden dentro de plataformas genéricas."
+    ],
+    "bulletsLead": "Esto implica:",
+    "bullets": [
+      "mejor afinidad con el huésped",
+      "identidad de marca más fuerte para tu espacio",
+      "más margen para vender experiencias, retiros o extras",
+      "un posicionamiento a largo plazo más significativo",
+      "un modelo de hospitalidad centrado en estilo de vida, no en turismo de masas"
+    ]
+  },
+  "whatYouGet": {
+    "heading": "Qué obtienes como anfitrión de Slowork",
+    "intro": "Entrar en la beta es mucho más que tener un sitio donde listar tu espacio.",
+    "bulletsLead": "Incluye",
+    "bullets": [
+      "acceso a la beta de Slowork",
+      "visibilidad dentro del ecosistema Slowork",
+      "una audiencia más curada",
+      "apoyo y recomendaciones personalizadas",
+      "la posibilidad de un posicionamiento a largo plazo en la plataforma",
+      "formar parte de un movimiento de viaje y trabajo remoto más intencional"
+    ]
+  },
+  "afterApply": {
+    "heading": "Qué pasa después de solicitar",
+    "intro": "Cuando envíes tu solicitud, revisaremos tu espacio y te responderemos en unos días.",
+    "bulletsLead": "Los anfitriones seleccionados pueden recibir:",
+    "bullets": [
+      "apoyo de onboarding",
+      "orientación para el anuncio",
+      "recomendaciones de posicionamiento",
+      "acceso anticipado a funciones de la plataforma",
+      "futuras vías de colaboración a medida que crezca el ecosistema"
+    ],
+    "closing": "No buscamos inventario masivo. Buscamos espacios que encajen de verdad con el mundo que Slowork está construyendo."
+  },
+  "faq": {
+    "heading": "Preguntas frecuentes",
+    "items": [
+      {
+        "question": "¿Cuáles son las comisiones?",
+        "answer": "La tarifa para anfitriones es más baja que en las grandes OTA y está pensada para ser transparente y justa contigo."
+      },
+      {
+        "question": "¿Cuáles son los requisitos mínimos?",
+        "answer": "Wi-Fi estable, instalaciones limpias, espacios de trabajo cómodos y alineación con los valores de Slowork y las expectativas del huésped."
+      },
+      {
+        "question": "¿Puedo vender cursos, retiros o experiencias locales?",
+        "answer": "Sí. Slowork está pensada para espacios que ofrecen más que alojamiento."
+      },
+      {
+        "question": "¿Cómo validáis a las huéspedes?",
+        "answer": "Trabajamos una comunidad respetuosa y alineada mediante validación de perfil, expectativas claras y cultura de plataforma."
+      },
+      {
+        "question": "¿La beta es gratuita?",
+        "answer": "Sí. Durante el periodo de prueba no hay tasas de plataforma por participar en la beta."
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": "¿Preparado/a para acoger en tus términos?",
+    "paragraphs": [
+      "Slowork se está construyendo ahora mismo.",
+      "Quienes se unan pronto como anfitriones no solo publicarán sus espacios.",
+      "Contribuirán a definir una forma mejor de que quienes trabajan en remoto descubran, reserven y disfruten lugares como el tuyo."
+    ],
+    "cta": "Solicita la beta ahora",
+    "ctaHref": "#es-join",
+    "closingLines": [
+      "Recibe huéspedes que encajan mejor.",
+      "Comparte lo que hace distinto tu espacio.",
+      "Forma parte de un nuevo capítulo de hospitalidad consciente."
+    ]
+  }
 }
