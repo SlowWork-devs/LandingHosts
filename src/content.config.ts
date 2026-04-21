@@ -78,6 +78,7 @@ const hostsSchema = z.object({
     ctaHref: z.string(),
     closingLines: z.array(z.string()),
   }),
+  storyQuote: z.string().optional(),
   video: z
     .object({
       title: z.string(),

@@ -2,7 +2,7 @@
   "hero": {
     "title": "Turn your space into a magnet for conscious remote travelers",
     "subtitle": "Break free from hidden fees, rigid rules and generic platforms. Join Slowork and connect with guests who value nature, focus, wellbeing and meaningful stays.",
-    "microcopy": "Limited spots available. We’re inviting a select group of hosts to co-create the first version of Slowork.",
+    "microcopy": "Limited spots available. We're inviting a select group of hosts to co-create the first version of Slowork.",
     "cta": "Join the beta now",
     "ctaHref": "#en-join"
   },
@@ -19,7 +19,7 @@
       "Delayed or missed payouts create unnecessary risk",
       "Generic platforms attract the wrong kind of guest for unique spaces"
     ],
-    "closing": "It’s time for a platform designed around your values, not just transactions."
+    "closing": "It's time for a platform designed around your values, not just transactions."
   },
   "whatIs": {
     "heading": "What is Slowork?",
@@ -126,7 +126,7 @@
   },
   "afterApply": {
     "heading": "What happens after you apply",
-    "intro": "Once you apply, we’ll review your space and get back to you within a few days.",
+    "intro": "Once you apply, we'll review your space and get back to you within a few days.",
     "bulletsLead": "Selected hosts may receive:",
     "bullets": [
       "onboarding support",
@@ -135,7 +135,7 @@
       "early access to platform features",
       "future collaboration opportunities as the ecosystem grows"
     ],
-    "closing": "We’re not looking for mass inventory. We’re looking for spaces that genuinely fit the world Slowork is building."
+    "closing": "We're not looking for mass inventory. We're looking for spaces that genuinely fit the world Slowork is building."
   },
   "faq": {
     "heading": "Frequently asked questions",
@@ -146,7 +146,7 @@
       },
       {
         "question": "What are the minimum requirements?",
-        "answer": "Stable Wi-Fi, clean facilities, comfortable workspaces and alignment with Slowork’s values and guest expectations."
+        "answer": "Stable Wi-Fi, clean facilities, comfortable workspaces and alignment with Slowork's values and guest expectations."
       },
       {
         "question": "Can I sell courses, retreats or local experiences?",
@@ -176,5 +176,6 @@
       "Share what makes your space different.",
       "Be part of a new chapter in conscious hospitality."
     ]
-  }
+  },
+  "storyQuote": "Hosting is not about keys. It's about providing the right environment for deep work."
 }
