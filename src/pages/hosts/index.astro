@@ -1,9 +1,7 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection, type CollectionEntry } from 'astro:content';
-import logoImg from '../../assets/logo-slowork.png';
 import Layout from '../../layouts/Layout.astro';
-import LanguageSwitcher from '../../components/hosts/LanguageSwitcher.astro';
+import HostsHeader from '../../components/hosts/HostsHeader.astro';
 import HostsLandingCore from '../../components/hosts/HostsLandingCore.astro';
 import HostsFooter from '../../components/hosts/HostsFooter.astro';
 
@@ -11,48 +9,37 @@ const entries = await getCollection('hosts');
 const pageEs = entries.find((e: CollectionEntry<'hosts'>) => e.id === 'es');
 const pageEn = entries.find((e: CollectionEntry<'hosts'>) => e.id === 'en');
 
-const metaSource = pageEs?.data.hero.subtitle ?? '';
+const metaSource = pageEn?.data.hero.subtitle ?? '';
 const metaDescription = metaSource.length > 160 ? `${metaSource.slice(0, 157)}…` : metaSource;
 ---
 
-<Layout title="Slowork Hosts" lang="es" description={metaDescription}>
-  <header
-    class="sticky top-0 z-40 flex items-center justify-between border-b border-primary/10 bg-bg-soft/85 px-5 py-4 backdrop-blur-md sm:px-8"
-  >
-    <a href="/hosts/" class="flex shrink-0 items-center" aria-label="Slowork Hosts">
-      <Image src={logoImg} alt="" width={120} class="h-9 w-auto object-contain sm:h-10" loading="eager" />
-    </a>
-    <LanguageSwitcher />
-  </header>
-
-  <div
-    id="hosts-panel-es"
-    data-lang-panel="es"
-    class="flex min-h-0 min-w-0 flex-1 flex-col"
-  >
-    <main class="w-full flex-1">
-      <div class="mx-auto w-full max-w-5xl px-5 sm:px-8 lg:px-10">
-        {pageEs ? (
-          <HostsLandingCore landing={pageEs.data} lang="es" idPrefix="es-" posterLoading="eager" />
-        ) : null}
-      </div>
-    </main>
-    <HostsFooter lang="es" />
-  </div>
+<Layout title="Slowork Hosts" lang="en" description={metaDescription}>
+  <HostsHeader />
 
   <div
     id="hosts-panel-en"
     data-lang-panel="en"
-    hidden
-    class="hidden flex min-h-0 min-w-0 flex-1 flex-col"
+    class="flex min-h-0 min-w-0 flex-1 flex-col"
   >
     <main class="w-full flex-1">
-      <div class="mx-auto w-full max-w-5xl px-5 sm:px-8 lg:px-10">
-        {pageEn ? (
-          <HostsLandingCore landing={pageEn.data} lang="en" idPrefix="en-" posterLoading="lazy" />
-        ) : null}
-      </div>
+      {pageEn ? (
+        <HostsLandingCore landing={pageEn.data} lang="en" idPrefix="en-" />
+      ) : null}
     </main>
     <HostsFooter lang="en" />
+  </div>
+
+  <div
+    id="hosts-panel-es"
+    data-lang-panel="es"
+    hidden
+    class="flex min-h-0 min-w-0 flex-1 flex-col"
+  >
+    <main class="w-full flex-1">
+      {pageEs ? (
+        <HostsLandingCore landing={pageEs.data} lang="es" idPrefix="es-" />
+      ) : null}
+    </main>
+    <HostsFooter lang="es" />
   </div>
 </Layout>

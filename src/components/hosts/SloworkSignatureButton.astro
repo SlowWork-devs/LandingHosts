@@ -1,0 +1,29 @@
+---
+import { ArrowRight } from '@lucide/astro';
+
+interface Props {
+  href: string;
+  ariaLabel?: string;
+  size?: 'default' | 'large';
+}
+
+const { href, ariaLabel, size = 'default' } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    'hosts-signature-btn group inline-flex items-center gap-2 rounded-full bg-secondary font-sans font-bold uppercase tracking-widest text-primary shadow-lg transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg-landing',
+    size === 'default' && 'px-6 py-3 text-[11px]',
+    size === 'large' && 'px-10 py-4 text-xs md:px-14 md:py-5 md:text-sm',
+  ]}
+  aria-label={ariaLabel}
+>
+  <span class="text-balance"><slot /></span>
+  <ArrowRight
+    size={16}
+    stroke-width={2}
+    class="shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
+    aria-hidden="true"
+  />
+</a>

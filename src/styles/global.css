@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:ital,wght@0,300;0,400;0,600;0,700;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,600;1,700&family=Instrument+Serif:ital@0;1&display=swap');
 
 @import "tailwindcss";
 
@@ -6,12 +6,103 @@
   --color-primary: #013333;
   --color-secondary: #e0bb44;
   --color-light-green: #ddeee5;
+  --color-bg-landing: #e2e8e5;
 
-  --font-display: "Outfit", system-ui, sans-serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Poppins", ui-sans-serif, sans-serif;
+  --font-editorial: "Instrument Serif", ui-serif, Georgia, serif;
 }
 
 @layer base {
+  html {
+    @apply bg-bg-landing font-sans text-primary antialiased;
+  }
+
   body {
-    @apply bg-light-green text-primary font-display antialiased;
+    @apply flex min-h-dvh flex-col;
+  }
+
+  main p,
+  footer p {
+    hyphens: manual;
+    text-wrap: pretty;
+  }
+
+  main li {
+    text-wrap: pretty;
+  }
+
+  h1 {
+    text-wrap: balance;
+  }
+
+  .font-editorial-serif {
+    font-family: var(--font-editorial);
+  }
+
+  .hosts-text-start p,
+  .hosts-text-start li {
+    text-align: start;
+  }
+
+  .hosts-text-center p,
+  .hosts-text-center li {
+    text-align: center;
+  }
+}
+
+@layer utilities {
+  .bg-section-light {
+    background-color: color-mix(in srgb, var(--color-light-green) 58%, var(--color-bg-landing));
+  }
+
+  .bg-section-dark {
+    background-color: color-mix(in srgb, var(--color-primary) 6.5%, var(--color-bg-landing));
+  }
+}
+
+/* Glass header: transparent until scroll */
+#hosts-site-header.hosts-header-scrolled {
+  background-color: color-mix(in srgb, #ffffff 90%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+/* Scroll reveal — CSS-only, no JS needed */
+@supports (animation-timeline: view()) {
+  @keyframes hosts-reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hosts-reveal {
+    animation: hosts-reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 22%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hosts-reveal {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer components {
+  /* Signature CTA button hover glow */
+  .hosts-signature-btn:hover {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--color-secondary) 35%, transparent),
+      0 12px 40px -8px color-mix(in srgb, var(--color-secondary) 42%, transparent),
+      0 4px 14px -4px color-mix(in srgb, var(--color-primary) 14%, transparent);
   }
 }

@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import logoImg from '../../assets/logo-slowork.png';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+---
+
+<header
+  id="hosts-site-header"
+  role="banner"
+  class="pointer-events-none fixed inset-x-0 top-0 z-30 w-full border-b border-transparent bg-transparent py-5 px-6 transition-[background-color,backdrop-filter,border-color] duration-300 md:px-12"
+>
+  <div class="pointer-events-auto mx-auto flex w-full max-w-7xl items-center justify-between gap-6">
+    <a
+      href="/hosts/"
+      class="flex min-h-11 min-w-11 shrink-0 touch-manipulation items-center rounded-sm transition-opacity duration-200 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-landing"
+      aria-label="Slowork — go to top"
+    >
+      <Image
+        src={logoImg}
+        alt="Slowork — curated spaces for remote professionals"
+        width={200}
+        class="h-9 w-auto max-w-[min(200px,42vw)] object-contain object-left md:h-10"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        densities={[1, 2]}
+        sizes="(max-width: 768px) 42vw, 200px"
+      />
+    </a>
+    <LanguageSwitcher />
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById('hosts-site-header');
+  const scrolledClass = 'hosts-header-scrolled';
+
+  const sync = () => {
+    if (!header) return;
+    if (window.scrollY > 50) {
+      header.classList.add(scrolledClass);
+    } else {
+      header.classList.remove(scrolledClass);
+    }
+  };
+
+  sync();
+  window.addEventListener('scroll', sync, { passive: true });
+</script>
