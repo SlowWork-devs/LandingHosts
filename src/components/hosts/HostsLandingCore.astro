@@ -1,241 +1,356 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import VideoFacade from './VideoFacade.astro';
+import {
+  CalendarCheck,
+  CircleCheck,
+  CircleX,
+  Sparkles,
+  Users2,
+} from '@lucide/astro';
+
+import SectionEyebrow from './SectionEyebrow.astro';
+import SloworkSignatureButton from './SloworkSignatureButton.astro';
 
 interface Props {
   landing: CollectionEntry<'hosts'>['data'];
   lang: 'es' | 'en';
   idPrefix?: string;
-  posterLoading?: 'eager' | 'lazy';
 }
 
-const { landing, lang, idPrefix = '', posterLoading = 'eager' } = Astro.props;
+const { landing, lang, idPrefix = '' } = Astro.props;
 const pid = idPrefix;
 
-const { hero, problem, whatIs, whyJoin, whoFor, howItWorks, different, whatYouGet, afterApply, faq, finalCta, video } =
-  landing;
+const {
+  hero,
+  problem,
+  whatIs,
+  whyJoin,
+  whoFor,
+  howItWorks,
+  different,
+  whatYouGet,
+  afterApply,
+  faq,
+  finalCta,
+  storyQuote,
+} = landing;
 
-const stackClass = 'gap-20 py-24 md:gap-28 md:py-32 lg:gap-32 lg:py-40';
+/* ─── UI labels only — no narrative copy ─────────────────────────────────── */
+const ui = {
+  en: {
+    heroBadge: 'Slowork Hosts',
+    /* Section eyebrow text */
+    storyEyebrow: 'Story',
+    /* Comparison panel headers */
+    comparisonEyebrow: 'Why it matters',
+    comparisonWrongLabel: 'The Wrong Fit',
+    comparisonRightLabel: 'The Perfect Fit',
+    /* Remaining section eyebrows */
+    benefitsEyebrow: 'Benefits',
+    profileEyebrow: 'Who it\'s for',
+    processEyebrow: 'How it works',
+    nextStepsEyebrow: 'Next steps',
+    faqEyebrow: 'FAQ',
+    finalCtaEyebrow: 'Join us',
+  },
+  es: {
+    heroBadge: 'Slowork Hosts',
+    storyEyebrow: 'Historia',
+    comparisonEyebrow: 'Por qué importa',
+    comparisonWrongLabel: 'El encaje equivocado',
+    comparisonRightLabel: 'El encaje perfecto',
+    benefitsEyebrow: 'Beneficios',
+    profileEyebrow: 'Para quién',
+    processEyebrow: 'Cómo funciona',
+    nextStepsEyebrow: 'Siguientes pasos',
+    faqEyebrow: 'Preguntas frecuentes',
+    finalCtaEyebrow: 'Únete',
+  },
+} as const;
 
+const t = ui[lang];
+
+/* Shared style tokens */
+const h2Class = 'text-3xl font-bold tracking-[-0.02em] text-primary text-balance md:text-5xl';
+const proseClass = 'text-lg leading-[1.75] text-primary/80 md:text-xl';
 const cardClass =
-  'group flex flex-col items-start rounded-2xl border border-primary/10 bg-white/40 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:bg-white/60 hover:shadow-md';
+  'group flex flex-col items-start rounded-2xl border border-primary/10 bg-white/40 p-6 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/60 hover:shadow-md';
+const comparisonRows = problem.points
+  .map((wrong, index) => ({
+    wrong,
+    right: different.bullets[index] ?? '',
+  }))
+  .filter((row) => row.right);
 
-const ctaButtonClass =
-  'inline-flex min-h-[3.5rem] items-center justify-center rounded-full bg-secondary px-12 py-4 text-lg font-semibold text-primary shadow-[0_8px_30px_-6px_rgba(234,179,8,0.65)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-[0_12px_40px_-6px_rgba(234,179,8,0.85)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary active:scale-[0.98]';
-
-const proseClass = 'max-w-[62ch] text-lg font-light leading-[1.8] text-primary/85 md:text-xl';
-const h2Class = 'text-3xl font-bold tracking-tight text-primary md:text-4xl';
 ---
 
-<div class:list={['flex flex-col', stackClass]}>
-  <!-- Hero -->
-  <section class="flex flex-col items-center gap-8 px-2 text-center" aria-labelledby={`${pid}hosts-hero-title`}>
-    <h1
-      id={`${pid}hosts-hero-title`}
-      class="max-w-[28ch] text-[clamp(2.25rem,6vw+1rem,4.5rem)] font-bold italic leading-[1.05] tracking-tight text-primary md:max-w-[36ch]"
-    >
-      {hero.title}
-    </h1>
-    <p id={`${pid}hosts-subtitle`} class:list={[proseClass, 'text-center']}>
-      {hero.subtitle}
-    </p>
-    <div class="flex flex-col items-center gap-4">
-      <a href={hero.ctaHref} class={ctaButtonClass}>
-        {hero.cta}
-      </a>
-      <p class="max-w-[48ch] text-sm font-medium leading-relaxed text-primary/75 md:text-base">
-        {hero.microcopy}
-      </p>
-    </div>
-  </section>
+<div class="relative flex min-h-dvh flex-col text-primary bg-bg-landing">
 
-  <!-- Problem -->
-  <section class="flex flex-col gap-6 px-2" aria-labelledby={`${pid}problem-heading`}>
-    <h2 id={`${pid}problem-heading`} class={h2Class}>
-      {problem.heading}
-    </h2>
-    <div class="flex flex-col gap-4">
-      {problem.bodyParagraphs.map((p) => (
-        <p class={proseClass}>{p}</p>
-      ))}
-    </div>
-    <ul class="list-disc space-y-2 pl-6 text-base font-light text-primary/85 md:text-lg">
-      {problem.points.map((item) => (
-        <li class="pl-1">{item}</li>
-      ))}
-    </ul>
-    <p class={`${proseClass} font-medium text-primary`}>{problem.closing}</p>
-  </section>
-
-  <!-- What is Slowork -->
+  {/* ─── 01 / HERO ──────────────────────────────────────────────────── */}
   <section
-    id={`${pid}manifesto`}
-    class="flex flex-col gap-6 px-2"
-    aria-labelledby={`${pid}whatis-heading`}
+    class="hosts-reveal relative w-full overflow-hidden bg-section-light px-6 py-32 text-center md:px-10"
+    aria-labelledby={`${pid}hosts-hero-title`}
   >
-    <h2 id={`${pid}whatis-heading`} class={h2Class}>
-      {whatIs.heading}
-    </h2>
-    <div class="flex flex-col gap-4">
-      {whatIs.paragraphs.map((p) => (
-        <p class={proseClass}>{p}</p>
-      ))}
-    </div>
-    <p class={`${proseClass} font-medium text-primary`}>{whatIs.closing}</p>
-  </section>
+    <div class="pointer-events-none absolute -left-24 top-20 h-72 w-72 rounded-full bg-primary/6 blur-3xl" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute -right-16 bottom-16 h-80 w-80 rounded-full bg-secondary/8 blur-3xl" aria-hidden="true"></div>
 
-  <!-- Why join -->
-  <section class="flex flex-col gap-8 px-2" aria-labelledby={`${pid}why-heading`}>
-    <h2 id={`${pid}why-heading`} class={h2Class}>
-      {whyJoin.heading}
-    </h2>
-    <p class={proseClass}>{whyJoin.intro}</p>
-    <div class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
-      {whyJoin.benefits.map((b) => (
-        <div class={cardClass}>
-          <h3 class="mb-2 text-lg font-semibold text-primary">{b.title}</h3>
-          <p class="text-sm font-light leading-relaxed text-primary/75 md:text-base">{b.body}</p>
-        </div>
-      ))}
-    </div>
-  </section>
+    <div class="relative mx-auto flex w-full max-w-5xl flex-col items-center pt-24 md:pt-28">
+      <div class="mb-6 flex justify-center">
+        <span class="inline-flex items-center gap-2 rounded-full border border-primary/10 bg-bg-landing/70 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.18em] text-primary/80 shadow-sm backdrop-blur-sm">
+          <Sparkles size={13} stroke-width={2} class="shrink-0 text-secondary" aria-hidden="true" />
+          {t.heroBadge}
+        </span>
+      </div>
 
-  <!-- Who for -->
-  <section class="flex flex-col gap-8 px-2" aria-labelledby={`${pid}who-heading`}>
-    <h2 id={`${pid}who-heading`} class={h2Class}>
-      {whoFor.heading}
-    </h2>
-    <p class={proseClass}>{whoFor.intro}</p>
-    <div class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
-      {whoFor.profiles.map((b) => (
-        <div class={cardClass}>
-          <h3 class="mb-2 text-lg font-semibold text-primary">{b.title}</h3>
-          <p class="text-sm font-light leading-relaxed text-primary/75 md:text-base">{b.body}</p>
-        </div>
-      ))}
+      <SectionEyebrow num={1} text="HERO" align="center" />
+
+      <h1
+        id={`${pid}hosts-hero-title`}
+        class="mx-auto max-w-4xl text-[clamp(2.75rem,7vw+0.5rem,5rem)] font-bold leading-[1.05] tracking-[-0.03em] text-primary text-balance"
+      >
+        {hero.title}
+      </h1>
+
+      <div class="hosts-text-center mx-auto mt-8 max-w-2xl space-y-4 text-lg leading-relaxed text-primary/80 md:text-xl">
+        <p>{hero.subtitle}</p>
+      </div>
+
+      <div class="mt-10 flex flex-col items-center gap-4">
+        <SloworkSignatureButton href={hero.ctaHref} size="large">
+          {hero.cta}
+        </SloworkSignatureButton>
+        <p class="max-w-xl text-sm font-medium text-primary/60 text-pretty">{hero.microcopy}</p>
+      </div>
     </div>
   </section>
 
-  <!-- How it works -->
-  <section class="flex flex-col gap-8 px-2" aria-labelledby={`${pid}how-heading`}>
-    <h2 id={`${pid}how-heading`} class={h2Class}>
-      {howItWorks.heading}
-    </h2>
-    <p class={proseClass}>{howItWorks.intro}</p>
-    <ol class="flex flex-col gap-6 md:gap-8">
-      {howItWorks.steps.map((step, i) => (
-        <li class="flex gap-4 rounded-2xl border border-primary/10 bg-white/30 p-6 md:gap-6">
-          <span
-            class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary/90 text-base font-bold text-primary"
-            aria-hidden="true"
-          >
-            {i + 1}
-          </span>
-          <div class="min-w-0">
-            <h3 class="text-lg font-semibold text-primary">{step.title}</h3>
-            <p class="mt-2 text-sm font-light leading-relaxed text-primary/75 md:text-base">{step.body}</p>
+  {/* ─── 02 / STORY ─────────────────────────────────────────────────── */}
+  <section class="hosts-reveal w-full bg-section-dark px-6 py-32 md:px-10">
+    <div class="hosts-text-center mx-auto flex w-full max-w-3xl flex-col items-center">
+      <SectionEyebrow num={2} text={t.storyEyebrow} align="center" />
+      <h2 class:list={[h2Class, 'mb-10 text-center']}>{problem.heading}</h2>
+
+      {storyQuote && (
+        <figure class="mb-12 w-full max-w-2xl rounded-2xl border border-primary/8 bg-[color-mix(in_srgb,var(--color-bg-landing),white_35%)] px-6 py-10 text-left shadow-sm md:px-10 md:py-12">
+          <blockquote class="border-l-4 border-secondary pl-6 md:pl-8">
+            <p class="font-editorial-serif text-xl italic leading-[1.65] text-primary/90 md:text-2xl">
+              "{storyQuote}"
+            </p>
+          </blockquote>
+        </figure>
+      )}
+
+      <div class="hosts-text-start w-full max-w-2xl space-y-5 text-lg leading-[1.75] text-primary/80 md:text-xl">
+        {problem.bodyParagraphs.map((p) => <p>{p}</p>)}
+        <p class="font-semibold text-primary">{problem.closing}</p>
+      </div>
+    </div>
+  </section>
+
+  {/* ─── 04 / COMPARISON (different) ───────────────────────────────── */}
+  <section class="hosts-reveal w-full bg-[#1A1A1A] px-6 py-32 text-center md:px-10" aria-labelledby={`${pid}comparison-heading`}>
+    <div class="hosts-text-center mx-auto flex w-full max-w-4xl flex-col items-center">
+      <SectionEyebrow num={4} text={t.comparisonEyebrow} align="center" tone="on-dark" />
+      <h2 id={`${pid}comparison-heading`} class="mb-8 text-3xl font-bold tracking-[-0.02em] text-white text-balance md:text-5xl">
+        {different.heading}
+      </h2>
+      <div class="mx-auto mb-14 max-w-2xl space-y-4 text-lg leading-relaxed text-white/65">
+        {different.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+
+      <div class="w-full max-w-5xl overflow-hidden rounded-3xl border border-white/12 bg-white/3 text-left shadow-[0_20px_60px_-20px_rgba(0,0,0,0.45)] backdrop-blur-md">
+        <div class="grid grid-cols-1 border-b border-white/10 md:grid-cols-2">
+          <div class="flex items-center gap-3 border-b border-white/10 px-6 py-5 md:border-b-0 md:border-r md:px-8">
+            <CircleX size={20} stroke-width={2} class="shrink-0 text-red-400/90" aria-hidden="true" />
+            <span class="text-xs font-bold uppercase tracking-widest text-white/80">{t.comparisonWrongLabel}</span>
           </div>
-        </li>
-      ))}
-    </ol>
-  </section>
-
-  <!-- Different -->
-  <section class="flex flex-col gap-6 px-2" aria-labelledby={`${pid}diff-heading`}>
-    <h2 id={`${pid}diff-heading`} class={h2Class}>
-      {different.heading}
-    </h2>
-    <div class="flex flex-col gap-4">
-      {different.paragraphs.map((p) => (
-        <p class={proseClass}>{p}</p>
-      ))}
-    </div>
-    <p class="text-base font-semibold text-primary md:text-lg">{different.bulletsLead}</p>
-    <ul class="list-disc space-y-2 pl-6 text-base font-light text-primary/85 md:text-lg">
-      {different.bullets.map((item) => (
-        <li class="pl-1">{item}</li>
-      ))}
-    </ul>
-  </section>
-
-  <!-- What you get -->
-  <section class="flex flex-col gap-6 px-2" aria-labelledby={`${pid}get-heading`}>
-    <h2 id={`${pid}get-heading`} class={h2Class}>
-      {whatYouGet.heading}
-    </h2>
-    <p class={proseClass}>{whatYouGet.intro}</p>
-    <p class="text-base font-semibold text-primary md:text-lg">{whatYouGet.bulletsLead}</p>
-    <ul class="list-disc space-y-2 pl-6 text-base font-light text-primary/85 md:text-lg">
-      {whatYouGet.bullets.map((item) => (
-        <li class="pl-1">{item}</li>
-      ))}
-    </ul>
-  </section>
-
-  <!-- After apply -->
-  <section class="flex flex-col gap-6 px-2" aria-labelledby={`${pid}after-heading`}>
-    <h2 id={`${pid}after-heading`} class={h2Class}>
-      {afterApply.heading}
-    </h2>
-    <p class={proseClass}>{afterApply.intro}</p>
-    <p class="text-base font-semibold text-primary md:text-lg">{afterApply.bulletsLead}</p>
-    <ul class="list-disc space-y-2 pl-6 text-base font-light text-primary/85 md:text-lg">
-      {afterApply.bullets.map((item) => (
-        <li class="pl-1">{item}</li>
-      ))}
-    </ul>
-    <p class={`${proseClass} font-medium text-primary`}>{afterApply.closing}</p>
-  </section>
-
-  <!-- FAQ -->
-  <section class="flex flex-col gap-10 px-2" aria-labelledby={`${pid}faq-heading`}>
-    <h2 id={`${pid}faq-heading`} class={h2Class}>
-      {faq.heading}
-    </h2>
-    <div class="flex flex-col gap-10">
-      {faq.items.map((item) => (
-        <div>
-          <h3 class="text-lg font-semibold text-primary md:text-xl">{item.question}</h3>
-          <p class={`${proseClass} mt-3 max-w-none text-base md:text-lg`}>{item.answer}</p>
+          <div class="flex items-center gap-3 px-6 py-5 md:px-8">
+            <CircleCheck size={20} stroke-width={2} class="shrink-0 text-secondary" aria-hidden="true" />
+            <span class="text-xs font-bold uppercase tracking-widest text-white/85">{t.comparisonRightLabel}</span>
+          </div>
         </div>
-      ))}
+
+        <p class="border-b border-white/10 px-6 py-3 text-[11px] font-semibold uppercase tracking-widest text-white/45 md:px-8">
+          {different.bulletsLead}
+        </p>
+
+        <ul class="divide-y divide-white/10">
+          {comparisonRows.map((row) => (
+            <li class="grid grid-cols-1 md:grid-cols-2">
+              <div class="flex items-start gap-3 px-6 py-5 md:border-r md:border-white/10 md:px-8">
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-red-400/70" aria-hidden="true"></span>
+                <span class="text-sm leading-relaxed text-white/70">{row.wrong}</span>
+              </div>
+              <div class="flex items-start gap-3 px-6 py-5 md:px-8">
+                <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary/90" aria-hidden="true"></span>
+                <span class="text-sm leading-relaxed text-white/88">{row.right}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   </section>
 
-  <!-- Final CTA -->
+  {/* ─── 05 / BENEFITS (whyJoin) ────────────────────────────────────── */}
+  <section class="hosts-reveal w-full bg-section-light px-6 py-32 md:px-10" aria-labelledby={`${pid}benefits-heading`}>
+    <div class="hosts-text-center mx-auto flex w-full max-w-5xl flex-col items-center">
+      <SectionEyebrow num={5} text={t.benefitsEyebrow} align="center" />
+      <h2 id={`${pid}benefits-heading`} class:list={[h2Class, 'mb-6 text-center']}>
+        {whyJoin.heading}
+      </h2>
+      <p class="mx-auto mb-16 max-w-2xl text-center text-lg text-primary/75 text-pretty">
+        {whyJoin.intro}
+      </p>
+
+      <div class="grid w-full grid-cols-1 gap-8 md:grid-cols-3 md:gap-10">
+        {whyJoin.benefits.slice(0, 3).map((benefit, idx) => (
+          <div class="group flex flex-col items-center rounded-3xl border border-primary/10 bg-bg-landing/40 p-8 text-center shadow-sm transition-shadow duration-300 hover:shadow-lg md:p-10">
+            <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-secondary/35 bg-secondary/12 text-secondary transition-transform duration-300 group-hover:scale-110 group-hover:bg-secondary/20">
+              {idx === 0 ? (
+                <Users2 size={28} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
+              ) : idx === 1 ? (
+                <CalendarCheck size={28} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
+              ) : (
+                <Sparkles size={28} stroke-width={2} class="shrink-0 text-current" aria-hidden="true" />
+              )}
+            </div>
+            <h3 class="font-editorial-serif text-2xl italic font-normal tracking-[-0.01em] text-primary">
+              {benefit.title}
+            </h3>
+            <p class="mt-4 max-w-xs border-l-4 border-secondary pl-5 text-left text-pretty text-base leading-relaxed text-primary/70">
+              {benefit.body}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ─── 06 / WHO FOR ───────────────────────────────────────────────── */}
+  <section class="hosts-reveal w-full bg-section-dark px-6 py-32 md:px-10" aria-labelledby={`${pid}who-heading`}>
+    <div class="hosts-text-center mx-auto flex w-full max-w-3xl flex-col items-center">
+      <SectionEyebrow num={6} text={t.profileEyebrow} align="center" />
+      <h2 id={`${pid}who-heading`} class:list={[h2Class, 'mb-8 text-center']}>
+        {whoFor.heading}
+      </h2>
+      <p class:list={[proseClass, 'mb-12 text-center text-pretty']}>{whoFor.intro}</p>
+
+      <div class="grid w-full grid-cols-1 gap-5 sm:grid-cols-2">
+        {whoFor.profiles.map((profile) => (
+          <div class={cardClass}>
+            <h3 class="mb-2 text-base font-semibold text-primary">{profile.title}</h3>
+            <p class="text-sm font-light leading-relaxed text-primary/70">{profile.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ─── 07 / HOW IT WORKS ──────────────────────────────────────────── */}
+  <section class="hosts-reveal w-full bg-section-light px-6 py-32 md:px-10" aria-labelledby={`${pid}how-heading`}>
+    <div class="hosts-text-center mx-auto flex w-full max-w-3xl flex-col items-center">
+      <SectionEyebrow num={7} text={t.processEyebrow} align="center" />
+      <h2 id={`${pid}how-heading`} class:list={[h2Class, 'mb-6 text-center']}>
+        {howItWorks.heading}
+      </h2>
+      <p class:list={[proseClass, 'mb-14 text-center text-pretty']}>{howItWorks.intro}</p>
+
+      <ol class="flex w-full flex-col gap-5">
+        {howItWorks.steps.map((step, i) => (
+          <li class="flex gap-5 rounded-2xl border border-primary/10 bg-white/35 p-6 backdrop-blur-sm md:gap-6">
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary/90 text-sm font-bold text-primary" aria-hidden="true">
+              {i + 1}
+            </span>
+            <div class="min-w-0">
+              <h3 class="text-base font-semibold text-primary">{step.title}</h3>
+              <p class="mt-1.5 text-sm font-light leading-relaxed text-primary/70">{step.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {/* ─── 08 / WHAT IS SLOWORK ───────────────────────────────────────── */}
+  <section class="hosts-reveal w-full bg-section-dark px-6 py-32 md:px-10" aria-labelledby={`${pid}whatis-heading`}>
+    <div class="hosts-text-center mx-auto flex w-full max-w-3xl flex-col items-center">
+      <SectionEyebrow num={8} text={t.nextStepsEyebrow} align="center" />
+      <h2 id={`${pid}whatis-heading`} class:list={[h2Class, 'mb-8 text-center']}>
+        {whatIs.heading}
+      </h2>
+      <div class:list={[proseClass, 'w-full space-y-5 text-center']}>
+        {whatIs.paragraphs.map((p) => <p>{p}</p>)}
+        <p class="font-semibold text-primary">{whatIs.closing}</p>
+      </div>
+    </div>
+  </section>
+
+  {/* ─── 09 / WHAT YOU GET ──────────────────────────────────────────── */}
+  <section class="hosts-reveal w-full bg-section-light px-6 py-32 md:px-10" aria-labelledby={`${pid}get-heading`}>
+    <div class="hosts-text-start mx-auto flex w-full max-w-3xl flex-col">
+      <SectionEyebrow num={9} text={whatYouGet.heading} />
+      <p class:list={[proseClass, 'mb-8']}>{whatYouGet.intro}</p>
+      <p class="mb-4 text-base font-semibold text-primary">{whatYouGet.bulletsLead}</p>
+      <ul class="space-y-3">
+        {whatYouGet.bullets.map((item) => (
+          <li class="flex items-start gap-3 text-base leading-relaxed text-primary/80">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary" aria-hidden="true"></span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <p class:list={[proseClass, 'mt-10 font-semibold text-primary']}>{afterApply.closing}</p>
+    </div>
+  </section>
+
+  {/* ─── 10 / FAQ ───────────────────────────────────────────────────── */}
+  <section class="hosts-reveal w-full bg-section-dark px-6 py-32 md:px-10" aria-labelledby={`${pid}faq-heading`}>
+    <div class="mx-auto flex w-full max-w-3xl flex-col items-center">
+      <SectionEyebrow num={10} text={t.faqEyebrow} align="center" />
+      <h2 id={`${pid}faq-heading`} class:list={[h2Class, 'mb-14 text-center']}>
+        {faq.heading}
+      </h2>
+      <div class="w-full divide-y divide-primary/10">
+        {faq.items.map((item) => (
+          <div class="py-8">
+            <h3 class="text-lg font-semibold text-primary md:text-xl">{item.question}</h3>
+            <p class="mt-3 text-base leading-relaxed text-primary/70 md:text-lg">{item.answer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ─── 11 / FINAL CTA ─────────────────────────────────────────────── */}
   <section
     id={`${pid}join`}
-    class="flex flex-col items-center gap-8 rounded-3xl border border-primary/15 bg-white/35 px-4 py-14 text-center shadow-sm backdrop-blur-sm md:px-10 md:py-16"
+    class="hosts-reveal w-full bg-section-light px-6 py-32 md:px-10"
     aria-labelledby={`${pid}final-heading`}
   >
-    <h2 id={`${pid}final-heading`} class:list={[h2Class, 'max-w-[22ch] md:max-w-[28ch]']}>
-      {finalCta.heading}
-    </h2>
-    <div class="flex max-w-[54ch] flex-col gap-4">
-      {finalCta.paragraphs.map((p) => (
-        <p class:list={[proseClass, 'text-center']}>{p}</p>
-      ))}
-    </div>
-    <a href={finalCta.ctaHref} class={ctaButtonClass}>
-      {finalCta.cta}
-    </a>
-    <div class="flex max-w-[42ch] flex-col gap-2 text-base font-medium text-primary/85 md:text-lg">
-      {finalCta.closingLines.map((line) => (
-        <p>{line}</p>
-      ))}
+    <div class="hosts-text-center mx-auto flex w-full max-w-4xl flex-col items-center">
+      <SectionEyebrow num={11} text={t.finalCtaEyebrow} align="center" />
+      <h2
+        id={`${pid}final-heading`}
+        class="mx-auto max-w-3xl text-4xl font-bold leading-[1.08] tracking-[-0.03em] text-primary text-balance md:text-6xl"
+      >
+        {finalCta.heading}
+      </h2>
+
+      <div class="mx-auto mb-12 mt-10 max-w-2xl space-y-5 text-lg leading-relaxed text-primary/80 md:text-xl">
+        {finalCta.paragraphs.map((p) => (
+          <p class="text-center">{p}</p>
+        ))}
+      </div>
+
+      <p class="font-editorial-serif mx-auto mb-14 max-w-3xl text-center text-2xl italic leading-snug text-primary/55 md:text-4xl">
+        {finalCta.closingLines.join(' ')}
+      </p>
+
+      <SloworkSignatureButton href={finalCta.ctaHref} size="large">
+        {finalCta.cta}
+      </SloworkSignatureButton>
     </div>
   </section>
 
-  <!-- Optional video -->
-  {video?.videoId ? (
-    <section class="w-full px-0" aria-label={video.title}>
-      <VideoFacade
-        videoId={video.videoId}
-        videoTitle={video.title}
-        posterUrl={video.posterUrl}
-        lang={lang}
-        posterLoading={posterLoading}
-      />
-    </section>
-  ) : null}
 </div>
